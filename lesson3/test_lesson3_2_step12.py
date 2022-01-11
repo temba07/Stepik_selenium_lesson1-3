@@ -3,6 +3,7 @@ from selenium import webdriver
 import time
 import pytest
 
+
 class TestText(unittest.TestCase):
     def test_lesson_spet10(self):
         link = "http://suninjuly.github.io/registration1.html"
@@ -25,7 +26,6 @@ class TestText(unittest.TestCase):
         welcome_text = welcome_text_elt.text
 
         self.assertEqual("Congratulations! You have successfully registered!", welcome_text, 'Первый тест')
-
 
     def test_lesson_spet11(self):
         link = "http://suninjuly.github.io/registration2.html"
