@@ -3,7 +3,7 @@ import math
 import pytest
 from selenium import webdriver
 
-answer = math.log(int(time.time()))
+lst = []
 
 @pytest.fixture()
 def browser():
@@ -12,12 +12,18 @@ def browser():
     yield browser
     print("\nquit browser..")
     browser.quit()
+    print(lst)
 
 
-@pytest.mark.parametrize('link', ["236896", "236897", "236898", "236899", "236903", "236904", "236905"])
-def test_answer(browser, link):
-    link = f"https://stepik.org/lesson/{link}/step/1"
+@pytest.mark.parametrize('links', ["236895", "236896", "236897", "236898", "236899", "236903", "236904", "236905"])
+def test_answer(browser, links):
+    link = f"https://stepik.org/lesson/{links}/step/1"
     browser.get(link)
     browser.implicitly_wait(10)
-    browser.find_element_by_css_selector("#ember88").send.keys(answer)
+    answer = math.log(int(time.time()))
+    browser.find_element_by_css_selector("[placeholder = 'Напишите ваш ответ здесь...']").send_keys(str(answer))
     browser.find_element_by_xpath("//button [text() = 'Отправить']").click()
+    correct = browser.find_element_by_css_selector("[class = smart-hints__hint]")
+    correct_text = correct.text
+    if correct_text != "Correct!":
+        lst.append(correct_text)
