@@ -12,7 +12,7 @@ def browser():
     yield browser
     print("\nquit browser..")
     browser.quit()
-    print(lst)
+    print(" ".join(lst))
 
 
 @pytest.mark.parametrize('links', ["236895", "236896", "236897", "236898", "236899", "236903", "236904", "236905"])
